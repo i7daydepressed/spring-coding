@@ -1,6 +1,8 @@
 package org.example;
 
+import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.example.exceptions.RandomGeneratorException;
@@ -50,4 +52,38 @@ public class Config {
     public int min() {
         return 0;
     }
+
+    @Bean
+    public Report GoodReport() {
+        return new Report("очень хорошо", 5);
+    }
+    @Bean
+    public Report OkReport() {
+        return new Report("сойдет", 4);
+    }
+    @Bean
+    public Report SomeReport(Integer random) {
+        return new Report("Сложно сказать", random);
+    }
+    @Bean
+    public Report ImpossibleReport(List<Report> reports) {
+        return reports.stream()
+            .max(Comparator.comparingInt(Report::grade))
+            .orElseThrow();
+    }
+
+    @Bean
+    public Student oneStudent(Predicate<Integer> range) {
+        return new Student("one", x -> range.test(x));
+    }
+    @Bean
+    public Student secStudent(Predicate<Integer> range) {
+        return new Student("sec", x -> range.test(x));
+    }
+
+    @Bean
+    public StudentBuilder studentBuilder(Predicate<Integer> range) {
+        return new StudentBuilder(x -> range.test(x));
+    }
+    
 }
