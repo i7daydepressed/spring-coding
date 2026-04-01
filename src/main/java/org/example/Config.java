@@ -26,7 +26,6 @@ public class Config {
         return randomGenerator.next();
     }
     @Bean
-    // синглтон
     @Qualifier("randomNoRepeatGenerator")
     public RandomNoRepeatGenerator randomNoRepeatGenerator(@Qualifier("min") int min, @Qualifier("max") int max) {
         return new RandomNoRepeatGenerator(min, max);
