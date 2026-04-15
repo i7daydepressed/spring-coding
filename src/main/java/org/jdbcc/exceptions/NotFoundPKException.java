@@ -1,4 +1,4 @@
-package org.jdbcc;
+package org.jdbcc.exceptions;
 
 public class NotFoundPKException extends RuntimeException {
     public NotFoundPKException(String message) {

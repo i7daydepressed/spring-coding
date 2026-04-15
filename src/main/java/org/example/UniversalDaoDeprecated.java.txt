@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jdbcc.PK;
+import org.jdbcc.annotations.PK;
 
 // 1)
 // реализовать БД для сотрудников — отделов
@@ -20,7 +20,7 @@ import org.jdbcc.PK;
 // реализовать findAll так, чтобы можно было управлять объёмом данных, запрошенных за один раз из базы
 // uT4sBNoI5A5FchmGKXd0
 
-public class UniversalDao<T> {
+public class UniversalDaoDeprecated<T> {
     private Connection connect;
     private Class<T> clz;
     private List<T> findAll;

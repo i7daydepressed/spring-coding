@@ -1,4 +1,4 @@
-package org.jdbcc;
+package org.jdbcc.exceptions;
 
 public class GetValueException extends RuntimeException {
     public GetValueException(String message) {

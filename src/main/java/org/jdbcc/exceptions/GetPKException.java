@@ -1,4 +1,4 @@
-package org.jdbcc;
+package org.jdbcc.exceptions;
 
 public class GetPKException extends GetValueException {
     public GetPKException(String message) {

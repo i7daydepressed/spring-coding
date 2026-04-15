@@ -1,5 +1,7 @@
 package org.jdbcc;
 
+import org.jdbcc.annotations.PK;
+
 public class Employee {
     @PK
     private Integer id;

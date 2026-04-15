@@ -9,6 +9,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jdbcc.annotations.PK;
+import org.jdbcc.exceptions.GetPKException;
+import org.jdbcc.exceptions.GetValueException;
+import org.jdbcc.exceptions.NotFoundPKException;
+
 // 1)
 // реализовать БД для сотрудников — отделов
 // создать классы таблиц
@@ -17,7 +22,8 @@ import java.util.List;
 // 2)
 // изменить findAll, так, чтобы он возвращал Stream
 // реализовать findAll так, чтобы можно было управлять объёмом данных, запрошенных за один раз из базы
-
+// 3)
+// тесты на h2
 
 public class UniversalDao<T> {
     protected final Connection connect;
@@ -189,7 +195,7 @@ public class UniversalDao<T> {
                 if (!(field.getType() == int.class || field.getType() == Integer.class)) continue;
                 try {
                     Object value = field.get(t);
-                    if (value == null) throw new GetPKException("PK через метод " + method.getName() + " равен null");
+                    if (value == null) throw new GetPKException("PK через поле " + field.getName() + " равен null");
                     return (Integer) value;
                 } catch (IllegalAccessException e) {
                     throw new GetPKException("не удалось получить PK через поле " + field.getName(), e);
@@ -200,7 +206,7 @@ public class UniversalDao<T> {
         if (rawId==null) throw new NotFoundPKException("в классе " + clz.getSimpleName() + " не удалось найти ни @PK, ни поле id");
         try {
                 Object value = rawId.get(t);
-            if (value == null) throw new GetPKException("PK через метод " + method.getName() + " равен null");
+            if (value == null) throw new GetPKException("PK через поле " + rawId.getName() + " равен null");
             return (Integer) value;
         } catch (IllegalAccessException e) {
             throw new GetPKException("не удалось получить PK через поле " + rawId.getName(), e);
